@@ -1,31 +1,42 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./login.css";
-const Login = () => {
-  return (
-    <div>
-      <div className="title">
-        <h1>CityTech Assessment</h1>
-      </div>
-      <div className="formContainer">
-        <Form className="form">
-          <Form.Group className="formGroup" controlId="formBasicEmail">
-            <Form.Label className="formLabel">Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-          </Form.Group>
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './login.css'; // import your CSS file
 
-          <Form.Group className="formGroup" controlId="formBasicPassword">
-            <Form.Label className="formLabel">Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-          <Button variant="primary" type="submit" className="btnSubmit">
-            Submit
-          </Button>
-        </Form>
-      </div>
-    </div>
+const Login = () => {
+  const [loginId, setLoginId] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e) => {
+    const ipAddress ='124.41.211.80'
+    e.preventDefault();
+    try {
+      const res = await axios.post('https://jp-dev.cityremit.global/web-api/config/v1/auths/login', {
+        login_id: loginId,
+        login_password: password,
+        ip_address: ipAddress,
+      });
+      localStorage.setItem('jwtToken', res.data.data[0].jwt_token); // set the JWT token in state
+
+
+       // do something with response data
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return (
+    <form className="login-form" onSubmit={handleSubmit}>
+      <h1>Login</h1>
+      <label>
+        Login ID:
+        <input type="text" value={loginId} onChange={(e) => setLoginId(e.target.value)} />
+      </label>
+      <label>
+        Password:
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      </label>
+      <button type="submit">Login</button>
+    </form>
   );
 };
 

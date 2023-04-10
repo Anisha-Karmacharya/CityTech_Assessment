@@ -1,0 +1,23 @@
+.dashboard{
+    padding: 1em 3em;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+ 
+}
+
+th {
+    background-color: rgb(181, 202, 243);
+}
+
+tr:nth-child(even) {
+  background-color: rgb(225, 235, 255);
+}

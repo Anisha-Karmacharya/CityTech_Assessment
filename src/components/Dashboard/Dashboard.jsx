@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import './Dashboard.css'
 const Dashboard = () => {
   const [data, setData] = useState("");
 
@@ -23,7 +23,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div>
+    <div className="dashboard">
       <h1>Dashboard</h1>
 
       <table>

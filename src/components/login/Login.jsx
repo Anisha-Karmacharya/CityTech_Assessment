@@ -5,7 +5,7 @@ import './login.css'; // import your CSS file
 const Login = () => {
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
-
+ 
   const handleSubmit = async (e) => {
     const ipAddress ='124.41.211.80'
     e.preventDefault();
@@ -15,8 +15,11 @@ const Login = () => {
         login_password: password,
         ip_address: ipAddress,
       });
-      localStorage.setItem('jwtToken', res.data.data[0].jwt_token); // set the JWT token in state
-
+      localStorage.setItem('jwtToken', res.data.data[0].jwt_token);
+      const isAuthenticated = localStorage.getItem('jwtToken'); // set the JWT token in state
+      if(isAuthenticated){
+        window.location.href = '/dashboard';
+      }
 
        // do something with response data
     } catch (err) {

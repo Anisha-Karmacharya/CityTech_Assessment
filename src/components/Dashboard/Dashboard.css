@@ -11,12 +11,13 @@ th, td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+ 
 }
 
 th {
-  background-color: #f2f2f2;
+    background-color: rgb(181, 202, 243);
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: rgb(225, 235, 255);
 }

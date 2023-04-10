@@ -3,7 +3,7 @@ import axios from "axios";
 import './Dashboard.css'
 const Dashboard = () => {
   const [data, setData] = useState("");
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       const jwtToken = localStorage.getItem("jwtToken");
@@ -17,11 +17,13 @@ const Dashboard = () => {
         }
       );
       setData(res?.data?.data);
-      console.log(res.data.data);
+      setLoading(false);
     };
     fetchData();
   }, []);
-
+  if (loading) {
+    return <p>Loading data... Please wait for few seconds</p>;
+  }
   return (
     <div className="dashboard">
       <h1>Dashboard</h1>

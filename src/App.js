@@ -7,11 +7,17 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-ro
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-      </Switch>
-    </Router>
+    <Switch>
+      <Route exact path="/">
+        {localStorage.getItem('jwtToken') ? (
+          <Redirect to="/dashboard" />
+        ) : (
+          <Login />
+        )}
+      </Route>
+      <PrivateRoute exact path="/dashboard" component={Dashboard} />
+    </Switch>
+  </Router>
   );
 }
 

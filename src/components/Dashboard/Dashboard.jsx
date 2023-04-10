@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './Dashboard.css'
-const Dashboard = () => {
+import './Dashboard.css';
+import { Redirect } from 'react-router-dom';
+
+const Dashboard = ({history}) => {
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(true);
+  const [redirect, setRedirect] = useState(false)
   useEffect(() => {
     const fetchData = async () => {
       const jwtToken = localStorage.getItem("jwtToken");
@@ -21,6 +24,16 @@ const Dashboard = () => {
     };
     fetchData();
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('jwtToken');
+    setRedirect(true);
+  };
+
+  if (redirect) {
+    return  <Redirect to={{ pathname: '/' }} />;;
+  }
+
   if (loading) {
     return <p>Loading data... Please wait for few seconds</p>;
   }
@@ -55,6 +68,8 @@ const Dashboard = () => {
             ))}
         </tbody>
       </table>
+
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

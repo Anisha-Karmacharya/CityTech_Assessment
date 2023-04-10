@@ -8,13 +8,7 @@ function App() {
   return (
     <Router>
     <Switch>
-      <Route exact path="/">
-        {localStorage.getItem('jwtToken') ? (
-          <Redirect to="/dashboard" />
-        ) : (
-          <Login />
-        )}
-      </Route>
+      <Route exact path="/" component={Login} />
       <PrivateRoute exact path="/dashboard" component={Dashboard} />
     </Switch>
   </Router>
